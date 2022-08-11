@@ -3,7 +3,7 @@ from tkinter import ttk, messagebox, filedialog
 from pytube import YouTube
 import _thread
 
-storagePath = "downloads/"
+# storagePath = "downloads/"
 #this 'r' is converting the normal string to raw string
 
 #main window
@@ -20,9 +20,9 @@ def show_progress_bar(stream, chunks, bytes_remaining):
     bar["value"] = progress
 
 def browse_button():
-    filename = filedialog.askdirectory()
-    print(filename)
-    return filename
+    global storagePath
+    storagePath = filedialog.askdirectory()
+    Label(root, text = "File path: " + storagePath).pack()
 
 
 def download():
@@ -59,7 +59,7 @@ urlErr.pack()
 
 # # storage button
 Label(root, text="Select the destination folder", font = 'arial 12 bold').pack(pady=5)
-button2 = Button(root, text="Browse", command=lambda: storagePath==browse_button()).pack()
+button2 = Button(root, text="Browse", command=browse_button).pack()
 
 #quality of the video
 Label(root, text="Select the quality of the video", font = 'arial 12 bold').pack(pady=10)
